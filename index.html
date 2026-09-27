@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Lawyee — Law Simplified for the Other Side of the Desk</title>
+  <meta name="description" content="The Lawyee bridges the gap between complex legal jargon and everyday citizens. Empowering you with consumer rights, contract clarity, and practical legal insights." />
+
+  <!-- Google Fonts: Cormorant Garamond (Serif elegance) & Plus Jakarta Sans (Clean modern sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti for celebratory waitlist submission -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#070C18',
+            deepslate: '#0E172A',
+            panel: 'rgba(19, 29, 51, 0.72)',
+            gold: {
+              300: '#F3E5AB',
+              400: '#E5C158',
+              500: '#D4AF37',
+              600: '#AA820A'
+            },
+            parchment: '#F8FAFC',
+            muted: '#94A3B8'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          },
+          boxShadow: {
+            'gold-glow': '0 0 35px -5px rgba(212, 175, 55, 0.25)',
+            'card-glow': '0 10px 40px -10px rgba(2, 6, 23, 0.7)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Subtle background grid pattern */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    
+    /* Elegant gold metallic gradient text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF6D1 0%, #D4AF37 50%, #9F781C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Ambient glassmorphic border */
+    .gold-border-glow {
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
+    }
+    .gold-border-glow:hover {
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 0 25px -5px rgba(212, 175, 55, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-midnight text-parchment font-sans antialiased min-h-screen relative selection:bg-gold-500/30 selection:text-gold-300 overflow-x-hidden">
+
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-gold-500/15 via-blue-900/10 to-transparent blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-[-15%] right-[-10%] w-[500px] h-[500px] bg-amber-600/10 blur-[130px] rounded-full"></div>
+    <div class="absolute top-1/2 left-[-15%] w-[450px] h-[450px] bg-sky-900/15 blur-[120px] rounded-full"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-60"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+    
+    <header class="w-full max-w-6xl mx-auto px-6 py-8 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <!-- Minimalist Stylized Scales/Monogram Icon -->
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400/20 via-gold-500/10 to-transparent border border-gold-500/30 flex items-center justify-center shadow-gold-glow group-hover:scale-105 transition-transform duration-300">
+          <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+            <path d="M7 21h10"/>
+            <path d="M12 3v18"/>
+            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-2xl font-bold tracking-tight text-white leading-none">
+            The Lawyee<span class="text-gold-400">.</span>
+          </span>
+          <span class="text-[10px] tracking-widest uppercase text-muted font-medium mt-1">thelawyee.com</span>
+        </div>
+      </a>
+
+      <!-- Quick Action / Share Button -->
+      <div class="flex items-center gap-3">
+        <button id="shareBtn" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-slate-800 text-muted hover:text-white border border-slate-700/60 transition-all duration-200">
+          <svg class="w-3.5 h-3.5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+          </svg>
+          <span id="shareBtnText">Share Site</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto px-6 pt-6 pb-20 flex flex-col items-center text-center">
+      
+      <!-- Launch Pill Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-gold-500/30 text-xs text-gold-300 mb-8 backdrop-blur-md shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+        <span class="tracking-wide uppercase font-semibold text-[11px]">Preparing Brief • Launching Q2 2025</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-4xl leading-[1.1] mb-6">
+        The lawyer advocates.<br/>
+        <span class="gold-gradient-text italic font-medium">The Lawyee</span> understands.
+      </h1>
+
+      <!-- Narrative Subheading & The Wordplay Explained -->
+      <p class="max-w-2xl text-base sm:text-lg text-slate-300 font-light leading-relaxed mb-10">
+        In any legal matter, there is always the <span class="text-white font-medium">lawyer</span>... and then there is <span class="text-gold-400 font-semibold underline decoration-gold-500/40 underline-offset-4">the lawyee</span>: the client, citizen, creator, and everyday person sitting on the other side of the desk. We are creating a sanctuary of plain-English rights, contract breakdowns, and practical law without the billable hour.
+      </p>
+
+      <div class="w-full max-w-xl mb-14">
+        <div class="grid grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl bg-deepslate/80 border border-slate-800/80 backdrop-blur-xl shadow-card-glow">
+          <div class="flex flex-col items-center justify-center p-3 rounded-xl bg-midnight/60 border border-slate-800/60">
+            <span id="days" class="font-serif text-2xl sm:text-4xl font-bold text-gold-400">00</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider text-muted mt-1 font-medium">Days</span>
+          </div>
+          <div class="flex flex-col items-center justify-center p-3 rounded-xl bg-midnight/60 border border-slate-800/60">
+            <span id="hours" class="font-serif text-2xl sm:text-4xl font-bold text-white">00</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider text-muted mt-1 font-medium">Hours</span>
+          </div>
+          <div class="flex flex-col items-center justify-center p-3 rounded-xl bg-midnight/60 border border-slate-800/60">
+            <span id="minutes" class="font-serif text-2xl sm:text-4xl font-bold text-white">00</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider text-muted mt-1 font-medium">Minutes</span>
+          </div>
+          <div class="flex flex-col items-center justify-center p-3 rounded-xl bg-midnight/60 border border-slate-800/60">
+            <span id="seconds" class="font-serif text-2xl sm:text-4xl font-bold text-gold-400">00</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-wider text-muted mt-1 font-medium">Seconds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full max-w-md mb-20">
+        <form id="waitlistForm" class="flex flex-col sm:flex-row items-stretch gap-2.5 p-2 rounded-2xl bg-deepslate/90 border border-gold-500/25 shadow-gold-glow backdrop-blur-xl">
+          <div class="relative flex-grow flex items-center">
+            <svg class="w-5 h-5 text-muted absolute left-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <input 
+              type="email" 
+              id="emailInput" 
+              required
+              placeholder="Enter your email for early access..." 
+              class="w-full pl-11 pr-4 py-3.5 bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-0"
+            />
+          </div>
+          <button 
+            type="submit" 
+            class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-slate-950 font-semibold text-sm transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-md flex items-center justify-center gap-2 whitespace-nowrap"
+          >
+            <span>Join Waitlist</span>
+            <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+        </form>
+
+        <p class="text-xs text-muted mt-3 flex items-center justify-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-gold-400 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+          No spam. Legal literacy dispatches only. Unsubscribe whenever.
+        </p>
+
+        <!-- Dynamic Success / Confirmation Card -->
+        <div id="confirmationBox" class="hidden mt-4 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-sm animate-fade-in">
+          <p class="font-medium flex items-center justify-center gap-2">
+            <span class="text-lg">⚖️</span> You're on the list! Welcome to the Lawyee collective.
+          </p>
+          <p class="text-xs text-emerald-400/80 mt-1">We'll alert you the moment the first dossier drops.</p>
+        </div>
+      </div>
+
+      <section class="w-full max-w-4xl mb-24 text-left">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Interactive Preview</span>
+            <h2 class="font-serif text-3xl font-bold text-white mt-1">The Legal Jargon Buster</h2>
+            <p class="text-sm text-slate-400 mt-1">A sample of how The Lawyee translates intimidating courtroom talk into plain human language.</p>
+          </div>
+          <div class="mt-4 md:mt-0 text-xs text-muted italic">Click any phrase to decode:</div>
+        </div>
+
+        <!-- Jargon Selector Buttons -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6" id="jargonPills">
+          <!-- Dynamically populated / styled in JS -->
+        </div>
+
+        <!-- Translation Card Display -->
+        <div id="jargonCard" class="p-6 sm:p-8 rounded-2xl bg-panel border border-slate-800/90 shadow-card-glow relative overflow-hidden backdrop-blur-md transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2">
+                <span id="jargonTerm" class="font-serif text-2xl sm:text-3xl font-bold text-white"></span>
+                <span id="jargonType" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-gold-300 border border-slate-700"></span>
+              </div>
+              <div class="mb-4">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">What the lawyers write:</span>
+                <p id="jargonFormal" class="text-sm text-slate-400 italic bg-midnight/50 p-3 rounded-lg border border-slate-800/80 font-mono"></p>
+              </div>
+              <div>
+                <span class="text-xs font-semibold text-gold-400 uppercase tracking-wider block mb-1">What the Lawyee actually needs to know:</span>
+                <p id="jargonPlain" class="text-base text-parchment leading-relaxed font-normal"></p>
+              </div>
+            </div>
+            <!-- Lawyee takeaway badge -->
+            <div class="sm:w-56 p-4 rounded-xl bg-midnight/70 border border-gold-500/20 flex flex-col justify-center shrink-0">
+              <span class="text-[11px] font-medium uppercase tracking-wider text-gold-400 mb-1">Rule of Thumb</span>
+              <p id="jargonTakeaway" class="text-xs text-slate-300 leading-normal"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="w-full max-w-5xl mb-16 text-left">
+        <div class="text-center mb-12">
+          <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Upcoming Content</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">What We're Demystifying</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="p-6 rounded-2xl bg-panel gold-border-glow backdrop-blur-md flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-4 font-serif text-xl font-bold">
+                §1
+              </div>
+              <h3 class="font-serif text-xl font-bold text-white mb-2">Plain-English Contracts</h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Leases, freelance agreements, employment NDAs, and software Terms of Service. Learn what you're actually signing before you put ink to paper.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center text-xs text-gold-400 font-medium">
+              <span>Articles & Redline Templates</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-6 rounded-2xl bg-panel gold-border-glow backdrop-blur-md flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-4 font-serif text-xl font-bold">
+                §2
+              </div>
+              <h3 class="font-serif text-xl font-bold text-white mb-2">Everyday Consumer Rights</h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Refund refusals, airline cancellations, security deposit disputes, and digital privacy. Actionable steps when someone tells you "it's our policy."
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center text-xs text-gold-400 font-medium">
+              <span>Step-by-step Resolution Guides</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-6 rounded-2xl bg-panel gold-border-glow backdrop-blur-md flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-4 font-serif text-xl font-bold">
+                §3
+              </div>
+              <h3 class="font-serif text-xl font-bold text-white mb-2">The Lawyee Toolkit</h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Free notice templates, demand letter formats, and curated checklists to keep yourself legally secure without spending thousands upfront.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800 flex items-center text-xs text-gold-400 font-medium">
+              <span>Downloadable Resources</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="w-full border-t border-slate-800/80 bg-deepslate/40 backdrop-blur-md py-10 px-6 mt-auto">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div>
+          <p class="font-serif font-bold text-lg text-white">The Lawyee<span class="text-gold-400">.</span></p>
+          <p class="text-xs text-slate-400 mt-0.5">Empowering everyday individuals across the legal landscape.</p>
+        </div>
+
+        <p class="text-[11px] text-slate-500 max-w-md text-center">
+          <strong class="text-slate-400">Disclaimer:</strong> The Lawyee is an educational publication and commentary platform. Content does not constitute formal legal counsel or create an attorney-client relationship.
+        </p>
+
+        <div class="flex items-center gap-4 text-xs text-muted">
+          <span>&copy; <span id="year"></span> thelawyee.com</span>
+        </div>
+      </div>
+    </footer>
+
+    <div id="toast" class="fixed bottom-6 right-6 max-w-sm px-4 py-3 rounded-xl bg-slate-900 border border-gold-500/40 text-slate-200 text-xs shadow-2xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2">
+      <svg class="w-4 h-4 text-gold-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      </svg>
+      <span id="toastMsg">Link copied to clipboard!</span>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. Current Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 2. Countdown Timer Logic (Targeting 60 days from current date)
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 45); // 45 days launch window
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        document.getElementById('days').innerText = "00";
+        document.getElementById('hours').innerText = "00";
+        document.getElementById('minutes').innerText = "00";
+        document.getElementById('seconds').innerText = "00";
+        return;
+      }
+
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = String(d).padStart(2, '0');
+      document.getElementById('hours').innerText = String(h).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // 3. Jargon Buster Data & Interactive State
+    const jargonList = [
+      {
+        term: "Force Majeure",
+        type: "Contract Law",
+        formal: '"Neither party shall be liable for failure of performance caused by acts of God, insurrection, or catastrophic occurrences beyond reasonable contemplation."',
+        plain: "If a natural disaster, global emergency, or freak disaster completely ruins everything, neither side can sue the other for not fulfilling the contract.",
+        takeaway: "Always check what is included; general inflation or a bad economy is almost never a valid Force Majeure excuse."
+      },
+      {
+        term: "Indemnification",
+        type: "Liability Clause",
+        formal: '"Party B agrees to indemnify, defend, and hold harmless Party A from and against any third-party claims, liabilities, damages, or costs."',
+        plain: "If someone sues us because of a mess you caused, you have to pay for our lawyers and cover any penalty the judge orders.",
+        takeaway: "Beware of unilateral indemnities in freelance contracts where you bear 100% of the risk without any liability cap."
+      },
+      {
+        term: "Tort",
+        type: "Civil Law",
+        formal: '"A civil wrong, other than a breach of contract, that causes a claimant to suffer loss or harm, resulting in legal liability."',
+        plain: "Someone carelessly harmed you or your property (like a slip-and-fall, defamation, or defective product), and you can ask a court to make them pay for it.",
+        takeaway: "It is civil, not criminal. The goal isn't jail time; it's financial compensation to make you 'whole'."
+      },
+      {
+        term: "In Lieu Of",
+        type: "Procedural",
+        formal: '"In lieu of notice, the obligor shall tender liquidated remittances commensurate with statutory timelines."',
+        plain: 'Fancy French for "Instead of." (e.g., getting two months of severance pay instead of working two months of notice).',
+        takeaway: "Whenever you spot this, substitute the word 'instead' and the sentence immediately becomes readable."
+      }
+    ];
+
+    let activeJargonIndex = 0;
+
+    function renderJargonPills() {
+      const container = document.getElementById('jargonPills');
+      container.innerHTML = '';
+
+      jargonList.forEach((item, index) => {
+        const btn = document.createElement('button');
+        const isActive = index === activeJargonIndex;
+        btn.className = `px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all text-center border ${
+          isActive 
+            ? 'bg-gold-500/20 text-gold-300 border-gold-500/50 shadow-sm' 
+            : 'bg-deepslate/60 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'
+        }`;
+        btn.textContent = item.term;
+        btn.onclick = () => {
+          activeJargonIndex = index;
+          renderJargonPills();
+          updateJargonCard();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function updateJargonCard() {
+      const item = jargonList[activeJargonIndex];
+      const card = document.getElementById('jargonCard');
+      
+      // Gentle fade transition
+      card.style.opacity = '0.5';
+      setTimeout(() => {
+        document.getElementById('jargonTerm').textContent = item.term;
+        document.getElementById('jargonType').textContent = item.type;
+        document.getElementById('jargonFormal').textContent = item.formal;
+        document.getElementById('jargonPlain').textContent = item.plain;
+        document.getElementById('jargonTakeaway').textContent = item.takeaway;
+        card.style.opacity = '1';
+      }, 150);
+    }
+
+    renderJargonPills();
+    updateJargonCard();
+
+    // 4. Toast notification helper
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3500);
+    }
+
+    // 5. Waitlist Form Submission with confetti
+    const waitlistForm = document.getElementById('waitlistForm');
+    const emailInput = document.getElementById('emailInput');
+    const confirmationBox = document.getElementById('confirmationBox');
+
+    waitlistForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      // Save locally so the user remains signed up in this browser
+      try {
+        const stored = JSON.parse(localStorage.getItem('lawyee_waitlist') || '[]');
+        if (!stored.includes(email)) {
+          stored.push(email);
+          localStorage.setItem('lawyee_waitlist', JSON.stringify(stored));
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
+      // Fire celebratory confetti
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.7 },
+          colors: ['#D4AF37', '#F59E0B', '#F8FAFC', '#93C5FD']
+        });
+      }
+
+      // Show confirmation
+      confirmationBox.classList.remove('hidden');
+      emailInput.value = '';
+      showToast("Brief logged! You're on the waitlist.");
+    });
+
+    // 6. Share / Copy Link handler
+    document.getElementById('shareBtn').addEventListener('click', () => {
+      const shareUrl = window.location.href;
+      
+      // Use fallback textarea copy to guarantee iframe compatibility
+      const tempInput = document.createElement('textarea');
+      tempInput.value = shareUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        showToast("Site link copied to clipboard!");
+      } catch (err) {
+        showToast("Share: " + window.location.host);
+      }
+      document.body.removeChild(tempInput);
+    });
+  </script>
+</body>
+</html>
