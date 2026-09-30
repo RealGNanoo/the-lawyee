@@ -131,54 +131,12 @@
         <span class="gold-gradient-text italic font-medium">The Lawyee</span> understands.
       </h1>
 
-      <!-- Narrative Subheading -->
-      <p class="max-w-2xl text-base sm:text-lg text-slate-300 font-light leading-relaxed mb-16">
-        In any legal matter, there is always the <span class="text-white font-medium">lawyer</span>... and then there is <span class="text-gold-400 font-semibold underline decoration-gold-500/40 underline-offset-4">the lawyee</span>: the client, citizen, creator, and everyday person sitting on the other side of the desk. We are crafting a publication focused on plain-English rights, contract breakdowns, and practical legal knowledge without the billable hour.
+      <!-- Updated Narrative Subheading -->
+      <p class="max-w-3xl text-base sm:text-lg text-slate-300 font-light leading-relaxed mb-20">
+        In any legal matter, there is always the judge and the lawyer... and then there is <span class="text-gold-400 font-semibold underline decoration-gold-500/40 underline-offset-4">the lawyee</span>: the citizens, and the everyday person sitting on the other side of the desk. We are crafting a publication focused on plain-rights available under the law, jurisprudence, and practical legal knowledge without the billable hour.
       </p>
 
-      <!-- Interactive Preview: Jargon Buster -->
-      <section class="w-full max-w-4xl mb-24 text-left">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-800">
-          <div>
-            <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Interactive Preview</span>
-            <h2 class="font-serif text-3xl font-bold text-white mt-1">The Legal Jargon Buster</h2>
-            <p class="text-sm text-slate-400 mt-1">A sample of how The Lawyee translates intimidating courtroom talk into plain human language.</p>
-          </div>
-          <div class="mt-4 md:mt-0 text-xs text-muted italic">Click any phrase to decode:</div>
-        </div>
-
-        <!-- Jargon Selector Buttons -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6" id="jargonPills">
-          <!-- Dynamically populated via JS -->
-        </div>
-
-        <!-- Translation Card Display -->
-        <div id="jargonCard" class="p-6 sm:p-8 rounded-2xl bg-panel border border-slate-800/90 shadow-card-glow relative overflow-hidden backdrop-blur-md transition-all duration-300">
-          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-2">
-                <span id="jargonTerm" class="font-serif text-2xl sm:text-3xl font-bold text-white"></span>
-                <span id="jargonType" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-gold-300 border border-slate-700"></span>
-              </div>
-              <div class="mb-4">
-                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">What the lawyers write:</span>
-                <p id="jargonFormal" class="text-sm text-slate-400 italic bg-midnight/50 p-3 rounded-lg border border-slate-800/80 font-mono"></p>
-              </div>
-              <div>
-                <span class="text-xs font-semibold text-gold-400 uppercase tracking-wider block mb-1">What the Lawyee actually needs to know:</span>
-                <p id="jargonPlain" class="text-base text-parchment leading-relaxed font-normal"></p>
-              </div>
-            </div>
-            
-            <div class="sm:w-56 p-4 rounded-xl bg-midnight/70 border border-gold-500/20 flex flex-col justify-center shrink-0">
-              <span class="text-[11px] font-medium uppercase tracking-wider text-gold-400 mb-1">Rule of Thumb</span>
-              <p id="jargonTakeaway" class="text-xs text-slate-300 leading-normal"></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Scope / Upcoming Pillars -->
+      <!-- Editorial Scope Section -->
       <section class="w-full max-w-5xl mb-16 text-left">
         <div class="text-center mb-12">
           <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Editorial Scope</span>
@@ -264,84 +222,10 @@
   </div>
 
   <script>
-    // 1. Current Year
+    // 1. Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Jargon Buster Data & Interactive State
-    const jargonList = [
-      {
-        term: "Force Majeure",
-        type: "Contract Law",
-        formal: '"Neither party shall be liable for failure of performance caused by acts of God, insurrection, or catastrophic occurrences beyond reasonable contemplation."',
-        plain: "If an unexpected natural disaster or global emergency completely ruins everything, neither side can sue the other for not fulfilling the contract.",
-        takeaway: "Always check what is included; general inflation or a bad economy is almost never a valid Force Majeure excuse."
-      },
-      {
-        term: "Indemnification",
-        type: "Liability Clause",
-        formal: '"Party B agrees to indemnify, defend, and hold harmless Party A from and against any third-party claims, liabilities, damages, or costs."',
-        plain: "If someone sues us because of a mess you caused, you have to pay for our lawyers and cover any penalty the judge orders.",
-        takeaway: "Beware of unilateral indemnities in freelance contracts where you bear 100% of the risk without any liability cap."
-      },
-      {
-        term: "Tort",
-        type: "Civil Law",
-        formal: '"A civil wrong, other than a breach of contract, that causes a claimant to suffer loss or harm, resulting in legal liability."',
-        plain: "Someone carelessly harmed you or your property (like a slip-and-fall, defamation, or defective product), and you can ask a court to make them pay for it.",
-        takeaway: "It is civil, not criminal. The goal isn't jail time; it's financial compensation to make you 'whole'."
-      },
-      {
-        term: "In Lieu Of",
-        type: "Procedural",
-        formal: '"In lieu of notice, the obligor shall tender liquidated remittances commensurate with statutory timelines."',
-        plain: 'Fancy French for "Instead of." (e.g., getting two months of severance pay instead of working two months of notice).',
-        takeaway: "Whenever you spot this, substitute the word 'instead' and the sentence immediately becomes readable."
-      }
-    ];
-
-    let activeJargonIndex = 0;
-
-    function renderJargonPills() {
-      const container = document.getElementById('jargonPills');
-      container.innerHTML = '';
-
-      jargonList.forEach((item, index) => {
-        const btn = document.createElement('button');
-        const isActive = index === activeJargonIndex;
-        btn.className = `px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all text-center border ${
-          isActive 
-            ? 'bg-gold-500/20 text-gold-300 border-gold-500/50 shadow-sm' 
-            : 'bg-deepslate/60 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'
-        }`;
-        btn.textContent = item.term;
-        btn.onclick = () => {
-          activeJargonIndex = index;
-          renderJargonPills();
-          updateJargonCard();
-        };
-        container.appendChild(btn);
-      });
-    }
-
-    function updateJargonCard() {
-      const item = jargonList[activeJargonIndex];
-      const card = document.getElementById('jargonCard');
-      
-      card.style.opacity = '0.5';
-      setTimeout(() => {
-        document.getElementById('jargonTerm').textContent = item.term;
-        document.getElementById('jargonType').textContent = item.type;
-        document.getElementById('jargonFormal').textContent = item.formal;
-        document.getElementById('jargonPlain').textContent = item.plain;
-        document.getElementById('jargonTakeaway').textContent = item.takeaway;
-        card.style.opacity = '1';
-      }, 150);
-    }
-
-    renderJargonPills();
-    updateJargonCard();
-
-    // 3. Toast helper
+    // 2. Toast Helper
     function showToast(msg) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toastMsg');
@@ -355,7 +239,7 @@
       }, 3500);
     }
 
-    // 4. Share button
+    // 3. Share Button
     document.getElementById('shareBtn').addEventListener('click', () => {
       const shareUrl = window.location.href;
       const tempInput = document.createElement('textarea');
