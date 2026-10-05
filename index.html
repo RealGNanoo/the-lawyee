@@ -208,8 +208,8 @@
       <!-- SECTION 3: CALL-TO-ACTION & PLATFORM PILLARS -->
       <section class="w-full max-w-5xl mb-16 text-left">
         <div class="text-center mb-10">
-          <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">The Road Ahead</span>
-          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Enter the Collective</h2>
+          <span class="text-xs font-semibold uppercase tracking-widest text-gold-400">Platform Pillars</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Explore the Platform</h2>
           <p class="text-sm text-slate-400 mt-2 max-w-xl mx-auto">Two distinct avenues built to move everyday citizens from passive compliance to informed agency.</p>
         </div>
 
@@ -227,32 +227,50 @@
               <p class="text-sm text-slate-300 leading-relaxed mb-6 font-light">
                 The educational foundation translating legal theory, statutes, and power dynamics into accessible civic literacy:
               </p>
-              <ul class="space-y-4 text-sm">
-                <li class="flex items-start gap-3">
-                  <span class="text-gold-400 font-serif text-lg leading-none mt-0.5">§</span>
-                  <div>
-                    <strong class="text-white block font-medium">Plain-Language Breakdowns</strong>
-                    <span class="text-slate-400 text-xs">Deep dives translating dense statutes, regulatory policies, and administrative decrees into clear, everyday language.</span>
-                  </div>
+              
+              <ul class="space-y-3.5 text-sm">
+                <!-- Article 1 Link -->
+                <li class="p-3.5 rounded-xl bg-midnight/60 border border-slate-800 hover:border-gold-500/40 transition-all group">
+                  <a href="articles/lawyee-definition.html" class="block">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="text-gold-400 font-serif font-bold text-base group-hover:text-gold-300">
+                        The Lawyee: Definition & Explanation
+                      </span>
+                      <span class="text-[10px] uppercase font-mono text-muted group-hover:text-gold-400">Read &rarr;</span>
+                    </div>
+                    <span class="text-slate-400 text-xs leading-relaxed block">
+                      A member of the general population subject to legal systems without participatory agency. The foundation of the platform.
+                    </span>
+                  </a>
                 </li>
-                <li class="flex items-start gap-3">
-                  <span class="text-gold-400 font-serif text-lg leading-none mt-0.5">§</span>
-                  <div>
-                    <strong class="text-white block font-medium">Essays & Thought Pieces</strong>
-                    <span class="text-slate-400 text-xs">Explorations of legal theory, historical power structures, and the evolving relationship between citizens and the state.</span>
-                  </div>
+
+                <!-- Article 2 Link -->
+                <li class="p-3.5 rounded-xl bg-midnight/60 border border-slate-800 hover:border-gold-500/40 transition-all group">
+                  <a href="articles/when-the-lawyees-awaken.html" class="block">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="text-gold-400 font-serif font-bold text-base group-hover:text-gold-300">
+                        When the Lawyees Awaken: Will the Tables Turn?
+                      </span>
+                      <span class="text-[10px] uppercase font-mono text-muted group-hover:text-gold-400">Read &rarr;</span>
+                    </div>
+                    <span class="text-slate-400 text-xs leading-relaxed block">
+                      The Lexicon of Power, the broken social compact, and why history proves that legal hegemony is never permanent.
+                    </span>
+                  </a>
                 </li>
-                <li class="flex items-start gap-3">
+
+                <!-- General Breakdown Description -->
+                <li class="flex items-start gap-3 pt-2">
                   <span class="text-gold-400 font-serif text-lg leading-none mt-0.5">§</span>
                   <div>
-                    <strong class="text-white block font-medium">Case Studies</strong>
-                    <span class="text-slate-400 text-xs">Real-world narratives highlighting how ordinary people successfully navigated or pushed back against institutional hurdles.</span>
+                    <strong class="text-white block font-medium">Plain-Language Breakdowns & Case Studies</strong>
+                    <span class="text-slate-400 text-xs">Deep dives translating dense statutes, regulatory policies, and real-world narratives where citizens pushed back.</span>
                   </div>
                 </li>
               </ul>
             </div>
             <div class="mt-8 pt-4 border-t border-slate-800 text-xs text-gold-400/90 font-medium">
-              Publishing with Launch
+              Educational & Research Repository
             </div>
           </div>
 
@@ -268,6 +286,7 @@
               <p class="text-sm text-slate-300 leading-relaxed mb-6 font-light">
                 The community vehicle designed to mobilize readers from passive observers into active participants:
               </p>
+              
               <ul class="space-y-4 text-sm">
                 <li class="flex items-start gap-3">
                   <span class="text-gold-400 font-serif text-lg leading-none mt-0.5">§</span>
@@ -334,7 +353,7 @@
     // 1. Dynamic Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Share Button handler
+    // 2. Share Button
     document.getElementById('shareBtn').addEventListener('click', () => {
       const shareUrl = window.location.href;
       const tempInput = document.createElement('textarea');
@@ -350,6 +369,7 @@
       document.body.removeChild(tempInput);
     });
 
+    // 3. Toast Helper
     function showToast(msg) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toastMsg');
